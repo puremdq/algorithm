@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 public class TestSort {
 
 
-    public static void testSort(int[] arr, String className, String methodName) throws Exception {
+    private static void testSort(int[] arr, String className, String methodName) throws Exception {
         long startTime, endTime;
         Class<?> handle = Class.forName("sort." + className);
         Method method = handle.getMethod(methodName, int[].class);
@@ -27,11 +27,14 @@ public class TestSort {
     public static void main(String[] args) {
         try {
             int len = 100000;
-            int min = -10000;
-            int max = 20000;
-            int[] arr = new int[len];
+            int min = -100000000;
+            int max = 10000000;
+            int[] arr;
+
 
             arr = Common.getArr(min, max, len);
+            // arr = Common.getNearlyOrderly(len, 5);
+            //Common.printArr(arr);
 
             testSort(Common.copyArray(arr), "SelectionSort", "selectionSort");
             testSort(Common.copyArray(arr), "InsertSort", "insertSort");
@@ -40,7 +43,9 @@ public class TestSort {
             testSort(Common.copyArray(arr), "BubbleSort", "betterBubbleSort");
             testSort(Common.copyArray(arr), "ShellSort", "shellSort");
             testSort(Common.copyArray(arr), "MergeSort", "mergeSort");
-
+            testSort(Common.copyArray(arr), "QuickSort", "quickSort");
+            testSort(Common.copyArray(arr), "QuickSort", "threeWayQuickSort");
+            testSort(Common.copyArray(arr), "HeapSort", "heapSort");
 
         } catch (Exception e) {
 
