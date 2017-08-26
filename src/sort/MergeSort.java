@@ -2,10 +2,13 @@ package sort;
 
 import common.Common;
 
+
 public class MergeSort {
     private MergeSort() {
     }
 
+
+    /*进行数组归并操作*/
     private static void doMerge(int[] arr, int start, int m, int end) {
 
         int i = 0, j = 0, k = start, leftLen = m - start + 1, rightLen = end - m;
@@ -18,29 +21,34 @@ public class MergeSort {
 
             if (j == rightLen || (i < leftLen && leftArr[i] <= rightArr[j])) {
                 arr[k++] = leftArr[i++];
-            } else if (i == leftLen || (j < rightLen && leftArr[i] > rightArr[j])) {
-                arr[k++] = leftArr[j++];
+            } else if (i == leftLen || (j < rightLen && rightArr[j] <= leftArr[i])) {
+                arr[k++] = rightArr[j++];
             }
 
         }
     }
 
-    private static void __mergeSort(int[] arr, int start, int end) {
+    //进行递归
+    private static void doMergeSort(int[] arr, int start, int end) {
 
 
-        if (start < end) {
-
-            int m = (int) (start + end) / 2;
-
-            __mergeSort(arr, start, m);
-            __mergeSort(arr, m + 1, end);
-            doMerge(arr, start, m, end);
-
+        if (end - start <= 15) {
+            InsertSort.betterInsertSort(arr, start, 1, end);
+            return;
         }
 
+        int m = (start + end) / 2;
+        doMergeSort(arr, start, m);
+        doMergeSort(arr, m + 1, end);
+        if (arr[m] > arr[m + 1]) {
+            doMerge(arr, start, m, end);
+        }
     }
 
+
     public static void mergeSort(int[] arr) {
-        __mergeSort(arr, 0, arr.length - 1);
+        doMergeSort(arr, 0, arr.length - 1);
     }
+
+
 }
