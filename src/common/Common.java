@@ -1,5 +1,7 @@
 package common;
 
+import sort.QuickSort;
+
 public class Common {
 
 
@@ -54,19 +56,32 @@ public class Common {
 
 
     public static void printArr(int[] arr) {
-        System.out.println();
-        System.out.println();
-        for (int i = 0; i < arr.length; i++) {
+        printArr(arr, 0, arr.length - 1);
+
+    }
+
+
+    /*打印一个数组*/
+    public static void printArr(int[] arr, int start, int end) {
+
+        if (start > end) {
+            return;
+        }
+
+        System.out.println("\n--------------------start print arr------------------------");
+
+        for (int i = start; i <= end; i++) {
 
             System.out.print(arr[i] + "  ");
-
-            if (i % 20 == 0 && i != 0) {
+            if ((i - start) % 20 == 0 && i != 0) {
                 System.out.println();
             }
         }
 
+        System.out.println("\n--------------------print arr end------------------------");
     }
 
+    /*判断数组是否从小到大排列有序*/
     public static boolean isArraySorted(int[] arr) {
         int length = arr.length;
         for (int i = 0; i < length - 1; i++) {
@@ -82,6 +97,10 @@ public class Common {
         return (int) (Math.random() * sub + min);
     }
 
+
+    /**
+     * 根据指定的最大值 最小值 和长度 生成一个随机的数组
+     */
     public static int[] getArr(int min, int max, int length) {
 
         if (min > max) {
@@ -95,5 +114,37 @@ public class Common {
             resArr[i] = getNumberInRange(min, max);
         }
         return resArr;
+    }
+
+
+    /**
+     * 生成一个几乎有序的数组(只交换几个元素)
+     *
+     * @param length  给定数组的长度
+     * @param swapNum 要交换的个数
+     */
+    public static int[] getNearlyOrderly(int length, int swapNum) {
+
+
+        int[] arr = new int[length];
+        for (int i = 0; i < arr.length; i++) {
+
+            arr[i] = i;
+        }
+
+        for (int j = 0; j < swapNum; j++) {
+            Common.swap(arr, Common.getNumberInRange(0, length - 1), Common.getNumberInRange(0, length - 1));
+        }
+        return arr;
+    }
+
+
+    /**
+     * 返回 a b中较小的一个
+     */
+    public static int getMin(int a, int b) {
+
+        return a < b ? a : b;
+
     }
 }
