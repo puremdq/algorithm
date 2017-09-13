@@ -1,6 +1,6 @@
-package sort;
+package com.aojiaoo.sort;
 
-import common.Common;
+import com.aojiaoo.common.Common;
 
 /*冒泡排序*/
 public class BubbleSort {

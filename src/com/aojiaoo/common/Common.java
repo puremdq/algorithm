@@ -1,6 +1,4 @@
-package common;
-
-import sort.QuickSort;
+package com.aojiaoo.common;
 
 public class Common {
 
@@ -8,15 +6,12 @@ public class Common {
     private void common() {
     }
 
-    public static int[] copyArray(int[] arr, int... args) {
+    public static int[] copyArray(int[] arr, int start, int end) {
 
-        int start = 0;
-        int end = arr.length - 1;
-        if (args.length >= 2) {
-            start = args[0];
-            end = args[1];
-
+        if (end < start) {
+            return null;
         }
+
         int[] newArr = new int[end - start + 1];
 
         for (int i = start; i <= end; i++) {
@@ -73,12 +68,12 @@ public class Common {
         for (int i = start; i <= end; i++) {
 
             System.out.print(arr[i] + "  ");
-            if ((i - start) % 20 == 0 && i != 0) {
+            if ((i - start) % 20 == 0 && (i - start != 0)) {
                 System.out.println();
             }
         }
 
-        System.out.println("\n--------------------print arr end------------------------");
+        System.out.println("\n--------------------print arr end------------------------\n");
     }
 
     /*判断数组是否从小到大排列有序*/
@@ -143,8 +138,13 @@ public class Common {
      * 返回 a b中较小的一个
      */
     public static int getMin(int a, int b) {
-
         return a < b ? a : b;
+    }
 
+    /**
+     * 返回 a b中较大的一个
+     */
+    public static int getMax(int a, int b) {
+        return a > b ? a : b;
     }
 }

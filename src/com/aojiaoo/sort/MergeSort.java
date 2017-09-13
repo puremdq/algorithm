@@ -1,6 +1,6 @@
-package sort;
+package com.aojiaoo.sort;
 
-import common.Common;
+import com.aojiaoo.common.Common;
 
 
 public class MergeSort {

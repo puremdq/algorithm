@@ -1,4 +1,4 @@
-package sort;
+package com.aojiaoo.sort;
 
 public class ShellSort {
 

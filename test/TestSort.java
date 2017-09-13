@@ -1,13 +1,13 @@
-import common.Common;
+import com.aojiaoo.common.Common;
 
 import java.lang.reflect.Method;
 
 public class TestSort {
 
 
-    private static void testSort(int[] arr, String className, String methodName) throws Exception {
+    private static void doTestSort(int[] arr, String className, String methodName) throws Exception {
         long startTime, endTime;
-        Class<?> handle = Class.forName("sort." + className);
+        Class<?> handle = Class.forName("com.aojiaoo.sort." + className);
         Method method = handle.getMethod(methodName, int[].class);
 
         startTime = System.nanoTime();
@@ -21,36 +21,39 @@ public class TestSort {
             //Common.printArr(arr);
             System.out.println(className + "排序失败");
         }
-
     }
 
-    public static void main(String[] args) {
+    private static void testSort(int len,int min,int max) {
+
         try {
-            int len = 100000;
-            int min = -100000000;
-            int max = 10000000;
-            int[] arr;
 
+            int[] arr = Common.getArr(min, max, len);
 
-            arr = Common.getArr(min, max, len);
             // arr = Common.getNearlyOrderly(len, 5);
             //Common.printArr(arr);
 
-            testSort(Common.copyArray(arr), "SelectionSort", "selectionSort");
-            testSort(Common.copyArray(arr), "InsertSort", "insertSort");
-            testSort(Common.copyArray(arr), "InsertSort", "betterInsertSort");
-            testSort(Common.copyArray(arr), "BubbleSort", "bubbleSort");
-            testSort(Common.copyArray(arr), "BubbleSort", "betterBubbleSort");
-            testSort(Common.copyArray(arr), "ShellSort", "shellSort");
-            testSort(Common.copyArray(arr), "MergeSort", "mergeSort");
-            testSort(Common.copyArray(arr), "QuickSort", "quickSort");
-            testSort(Common.copyArray(arr), "QuickSort", "threeWayQuickSort");
-            testSort(Common.copyArray(arr), "HeapSort", "heapSort");
+            doTestSort(Common.copyArray(arr), "SelectionSort", "selectionSort");
+            doTestSort(Common.copyArray(arr), "InsertSort", "insertSort");
+            doTestSort(Common.copyArray(arr), "InsertSort", "betterInsertSort");
+            doTestSort(Common.copyArray(arr), "BubbleSort", "bubbleSort");
+            doTestSort(Common.copyArray(arr), "BubbleSort", "betterBubbleSort");
+            doTestSort(Common.copyArray(arr), "ShellSort", "shellSort");
+            doTestSort(Common.copyArray(arr), "MergeSort", "mergeSort");
+            doTestSort(Common.copyArray(arr), "QuickSort", "quickSort");
+            doTestSort(Common.copyArray(arr), "QuickSort", "threeWayQuickSort");
+            doTestSort(Common.copyArray(arr), "HeapSort", "heapSort");
+            doTestSort(arr, "HeapSort", "indexHeapSort");
 
         } catch (Exception e) {
 
             System.out.println("Exception");
             System.out.println(e.getMessage());
         }
+
+    }
+
+
+    public static void main(String[] args) {
+        testSort(100000,1,2000);
     }
 }
